@@ -2,8 +2,7 @@
 extern crate gio;
 extern crate gtk;
 
-use gio::prelude::*;
-use gtk::{init, main as gtk_main, Application};
+use gtk::*;
 use std::process;
 
 mod app;
@@ -15,12 +14,9 @@ fn main() {
         process::exit(1);
     }
 
-    if let Ok(app) = Application::new(
-        Some("com.github.rust-lang-ve.gtk-basic"),
-        Default::default(),
-    ) {
-        app.window.show_all();
+    let app = app::App::new();
 
-        gtk_main();
-    }
+    app.window.show_all();
+
+    gtk::main();
 }

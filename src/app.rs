@@ -1,5 +1,5 @@
 use crate::header::Header;
-use gtk::Window;
+use gtk::*;
 
 pub struct App {
     pub window: Window,
@@ -7,11 +7,11 @@ pub struct App {
 }
 
 impl App {
-    fn new() -> Self {
-        let window = Window::new(WindowType::TopLevel);
+    pub fn new() -> Self {
+        let window = Window::new(WindowType::Toplevel);
         let header = Header::new();
 
-        window.set_titlebar(&header.container);
+        window.set_titlebar(Some(&header.container));
         window.set_title("Application Name");
         window.set_wmclass("app-name", "Application Name");
 
@@ -19,7 +19,7 @@ impl App {
 
         window.connect_delete_event(move |_, _| {
             main_quit();
-            Inhitib(false)
+            Inhibit(false)
         });
 
         Self { window, header }
